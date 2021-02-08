@@ -313,4 +313,4 @@ async def prof_loss_price():
 
 
 
-client.run('ODAyOTc2OTcxMjc2NTUwMTY2.YA3ElA.RwfEeOkL7ditijj8fbfer7ATE-I')
+client.run('Your Bot Token here')
