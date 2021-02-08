@@ -8,6 +8,14 @@
 #
 
 
+
+#
+# Make sure to go through/edit this file carfully to change different arguments to your choice.
+#
+
+
+
+
 import discord
 from discord.ext import commands
 from discord.ext import tasks
@@ -95,6 +103,11 @@ async def coin_info(ctx, id, currency):
         ctx.send("The correct usage is - $coinprice <coinname> <currency>! (lowercases)")
 
 
+                   
+                   
+# Make sure to edit the discord channel ids before you run the script!                   
+                   
+                   
 
 
 @tasks.loop(seconds=86400.0)
@@ -270,45 +283,55 @@ async def _doge5m():
         await doge5m.send(embed=doge5m_embed)
 
 
+                               
+                               
+                               
+# This is just a test example of an embed reply from the bot -
 
-@client.command(aliases=['embed'])
-async def embed_test(ctx):
-    embedVar = discord.Embed(title="BTC", description="Bitcoin vs Inr", color=0x00ff00)
-    embedVar.add_field(name="Price", value="50000", inline=True)
-    embedVar.add_field(name="Currency", value="USD", inline=True)
-    embedVar.set_author(name="Crypto Monitor", icon_url="https://camo.githubusercontent.com/94b5f3bae21ae60db73a4092fb17a1432796651a991751c19a4683328e014af2/687474703a2f2f7374617469632e74756d626c722e636f6d2f7070646a3579392f4165396d786d7874702f333030636f696e2e706e67")
-    embedVar.set_thumbnail(url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
-    await ctx.send(embed=embedVar)
+#@client.command(aliases=['embed'])
+#async def embed_test(ctx):
+#    embedVar = discord.Embed(title="BTC", description="Bitcoin vs Inr", color=0x00ff00)
+#    embedVar.add_field(name="Price", value="50000", inline=True)
+#    embedVar.add_field(name="Currency", value="USD", inline=True)
+#    embedVar.set_author(name="Crypto Monitor", icon_url="https://camo.githubusercontent.com/94b5f3bae21ae60db73a4092fb17a1432796651a991751c19a4683328e014af2/687474703a2f2f7374617469632e74756d626c722e636f6d2f7070646a3579392f4165396d786d7874702f333030636f696e2e706e67")
+#    embedVar.set_thumbnail(url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
+#    await ctx.send(embed=embedVar)
 
 
+                               
+                               
+                               
+# This is an example of the profit/loss coloured response from the bot
+# Basically, if the value of a particular crypto rises, it sends the embeded message in green color indicating rise and vice-e-versa.
+#Remove the '#' from the below loop block to activate it.
 
-@tasks.loop(seconds=15)
-async def prof_loss_price():
-    price_change = cg.get_price(ids='bitcoin', vs_currencies='usd')
-    await asyncio.sleep(10)
-    price = cg.get_price(ids='bitcoin', vs_currencies='usd')
-    if price_change['bitcoin']['usd'] > price['bitcoin']['usd']:
-        btc5m = client.get_channel(726377826152087625)
-        btc5m_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
-        btc5m_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0x1f8b4c)
-        btc5m_embed.add_field(name="Price", value=f"{btc5m_updater['bitcoin']['usd']}", inline=True)
-        btc5m_embed.add_field(name="Currency", value="USD", inline=True)
-        btc5m_embed.set_author(name="Crypto Monitor",
-                               icon_url="https://st3.depositphotos.com/5906102/14454/v/600/depositphotos_144548047-stock-illustration-crypto-currency-bitcoin-golden-symbol.jpg")
-        btc5m_embed.set_thumbnail(
-            url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
-        await btc5m.send(embed=btc5m_embed)
-    else:
-        btc5m = client.get_channel(726377826152087625)
-        btc5m_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
-        btc5m_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0xe74c3c)
-        btc5m_embed.add_field(name="Price", value=f"{btc5m_updater['bitcoin']['usd']}", inline=True)
-        btc5m_embed.add_field(name="Currency", value="USD", inline=True)
-        btc5m_embed.set_author(name="Crypto Monitor",
-                               icon_url="https://st3.depositphotos.com/5906102/14454/v/600/depositphotos_144548047-stock-illustration-crypto-currency-bitcoin-golden-symbol.jpg")
-        btc5m_embed.set_thumbnail(
-            url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
-        await btc5m.send(embed=btc5m_embed)
+#@tasks.loop(seconds=15)
+#async def prof_loss_price():
+#    price_change = cg.get_price(ids='bitcoin', vs_currencies='usd')
+#    await asyncio.sleep(10)
+#    price = cg.get_price(ids='bitcoin', vs_currencies='usd')
+#    if price_change['bitcoin']['usd'] > price['bitcoin']['usd']:
+#        btc5m = client.get_channel(726377826152087625)
+#        btc5m_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
+#        btc5m_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0x1f8b4c)
+#        btc5m_embed.add_field(name="Price", value=f"{btc5m_updater['bitcoin']['usd']}", inline=True)
+#        btc5m_embed.add_field(name="Currency", value="USD", inline=True)
+#        btc5m_embed.set_author(name="Crypto Monitor",
+#                               icon_url="https://st3.depositphotos.com/5906102/14454/v/600/depositphotos_144548047-stock-illustration-crypto-currency-bitcoin-golden-symbol.jpg")
+#        btc5m_embed.set_thumbnail(
+#            url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
+#        await btc5m.send(embed=btc5m_embed)
+#    else:
+#        btc5m = client.get_channel(726377826152087625)
+#        btc5m_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
+#        btc5m_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0xe74c3c)
+#        btc5m_embed.add_field(name="Price", value=f"{btc5m_updater['bitcoin']['usd']}", inline=True)
+#        btc5m_embed.add_field(name="Currency", value="USD", inline=True)
+#        btc5m_embed.set_author(name="Crypto Monitor",
+#                               icon_url="https://st3.depositphotos.com/5906102/14454/v/600/depositphotos_144548047-stock-illustration-crypto-currency-bitcoin-golden-symbol.jpg")
+#        btc5m_embed.set_thumbnail(
+#            url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
+#        await btc5m.send(embed=btc5m_embed)
 
 
 
