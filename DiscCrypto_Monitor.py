@@ -10,7 +10,7 @@
 
 
 #
-# Make sure to go through/edit this file carfully to change different arguments to your choice.
+# Make sure to go through/edit this file carefully to change stuff to your choice.
 #
 
 
