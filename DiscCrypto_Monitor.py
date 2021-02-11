@@ -53,13 +53,13 @@ async def change_status():
 @client.event
 async def on_member_join(member):
     print(f"{member} has arrived.")
-    welcome = client.get_channel(808360129837400095)
+    welcome = client.get_channel()  <--- #Enter the ID of #welcome channel
     await welcome.send(f"{member} has arrived.")
 
 
 async def on_member_remove(member):
     print(f"pce {member}")
-    bye = client.get_channel(808360129837400095)
+    bye = client.get_channel()   <--- #Enter the ID of #welcome/#left channel
     await bye.send(f"pce {member}")
 
 
@@ -105,18 +105,20 @@ async def coin_info(ctx, id, currency):
 
                    
                    
-# Make sure to edit the discord channel ids before you run the script!                   
+# Make sure to edit the discord channel ids before you run the script!
+# Make categories - BTC & DOGE (You can make many more, you'll have to edit/add more code for that)
                    
                    
 
-
+# BTC 1-Day Updates---------------------------------------------------------------------------------
+                   
 @tasks.loop(seconds=86400.0)
 async def _btc1d():
     price_change = cg.get_price(ids='bitcoin', vs_currencies='usd')
     await asyncio.sleep(86100)
     price = cg.get_price(ids='bitcoin', vs_currencies='usd')
     if price_change['bitcoin']['usd'] > price['bitcoin']['usd']:
-        btc1d = client.get_channel(808357840023715871)
+        btc1d = client.get_channel()  <-------------------------------------------- # ID of channel where btc price will be posted everyday
         btc1d_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
         btc1d_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0x1f8b4c)
         btc1d_embed.add_field(name="Price", value=f"{btc1d_updater['bitcoin']['usd']}", inline=True)
@@ -127,7 +129,7 @@ async def _btc1d():
             url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
         await btc1d.send(embed=btc1d_embed)
     else:
-        btc1d = client.get_channel(808357840023715871)
+        btc1d = client.get_channel() <------------------------------------------------ # Same as above
         btc1d_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
         btc1d_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0xe74c3c)
         btc1d_embed.add_field(name="Price", value=f"{btc1d_updater['bitcoin']['usd']}", inline=True)
@@ -139,13 +141,19 @@ async def _btc1d():
         await btc1d.send(embed=btc1d_embed)
 
 
+                              
+
+                              
+# Dogecoin 1-Day Updates                              
+
+                              
 @tasks.loop(seconds=86400)
 async def _doge1d():
     price_change = cg.get_price(ids='dogecoin', vs_currencies='inr')
     await asyncio.sleep(86100)
     price = cg.get_price(ids='dogecoin', vs_currencies='inr')
     if price_change['dogecoin']['inr'] > price['dogecoin']['inr']:
-        doge1d = client.get_channel(808357910555525120)
+        doge1d = client.get_channel() <--------------------------------------- # ID of channel where dogecoin price will be posted everyday
         doge1d_updater = cg.get_price(ids='dogecoin', vs_currencies='inr')
         doge1d_embed = discord.Embed(title=f"Doge", description=f"Doge vs INR", colour=0x1f8b4c)
         doge1d_embed.add_field(name="Price", value=f"{doge1d_updater['dogecoin']['inr']}", inline=True)
@@ -154,7 +162,7 @@ async def _doge1d():
         doge1d_embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
         await doge1d.send(embed=doge1d_embed)
     else:
-        doge1d = client.get_channel(808357910555525120)
+        doge1d = client.get_channel() <------------------------------------------------ # Same as above
         doge1d_updater = cg.get_price(ids='dogecoin', vs_currencies='inr')
         doge1d_embed = discord.Embed(title=f"Doge", description=f"Doge vs INR", colour=0xe74c3c)
         doge1d_embed.add_field(name="Price", value=f"{doge1d_updater['dogecoin']['inr']}", inline=True)
@@ -167,13 +175,20 @@ async def _doge1d():
 
 
 
+                               
+                               
+                               
+# BTC-1h updates                               
+
+                               
+                               
 @tasks.loop(seconds=3600.0)
 async def _btc1h():
     price_change = cg.get_price(ids='bitcoin', vs_currencies='usd')
     await asyncio.sleep(3300)
     price = cg.get_price(ids='bitcoin', vs_currencies='usd')
     if price_change['bitcoin']['usd'] > price['bitcoin']['usd']:
-        btc1h = client.get_channel(808357866062348318)
+        btc1h = client.get_channel() <-------------------------------------------- # ID of channel where btc price will be posted every hour
         btc1h_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
         btc1h_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0x1f8b4c)
         btc1h_embed.add_field(name="Price", value=f"{btc1h_updater['bitcoin']['usd']}", inline=True)
@@ -184,7 +199,7 @@ async def _btc1h():
             url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
         await btc1h.send(embed=btc1h_embed)
     else:
-        btc1h = client.get_channel(808357866062348318)
+        btc1h = client.get_channel() <------------------------------------------------ # Same as above
         btc1h_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
         btc1h_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0xe74c3c)
         btc1h_embed.add_field(name="Price", value=f"{btc1h_updater['bitcoin']['usd']}", inline=True)
@@ -196,6 +211,13 @@ async def _btc1h():
         await btc1h.send(embed=btc1h_embed)
 
 
+                              
+                              
+                              
+                              
+# Dogecoin 1h updates
+                              
+                              
 
 @tasks.loop(seconds=3600.0)
 async def _doge1h():
@@ -203,7 +225,7 @@ async def _doge1h():
     await asyncio.sleep(3300)
     price = cg.get_price(ids='dogecoin', vs_currencies='inr')
     if price_change['dogecoin']['inr'] > price['dogecoin']['inr']:
-        doge1h = client.get_channel(808357927441137674)
+        doge1h = client.get_channel() <--------------------------------------- # ID of channel where dogecoin price will be posted every hour
         doge1h_updater = cg.get_price(ids='dogecoin', vs_currencies='inr')
         doge1h_embed = discord.Embed(title=f"Doge", description=f"Doge vs INR", colour=0x1f8b4c)
         doge1h_embed.add_field(name="Price", value=f"{doge1h_updater['dogecoin']['inr']}", inline=True)
@@ -212,7 +234,7 @@ async def _doge1h():
         doge1h_embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
         await doge1h.send(embed=doge1h_embed)
     else:
-        doge1h = client.get_channel(808357927441137674)
+        doge1h = client.get_channel() <------------------------------------------------ # Same as above
         doge1h_updater = cg.get_price(ids='dogecoin', vs_currencies='inr')
         doge1h_embed = discord.Embed(title=f"Doge", description=f"Doge vs INR", colour=0xe74c3c)
         doge1h_embed.add_field(name="Price", value=f"{doge1h_updater['dogecoin']['inr']}", inline=True)
@@ -224,6 +246,12 @@ async def _doge1h():
         await doge1h.send(embed=doge1h_embed)
 
 
+                               
+                               
+                               
+# BTC 5min updates
+                               
+                               
 
 @tasks.loop(seconds=300.0)
 async def _btc5m():
@@ -231,7 +259,7 @@ async def _btc5m():
     await asyncio.sleep(270)
     price = cg.get_price(ids='bitcoin', vs_currencies='usd')
     if price_change['bitcoin']['usd'] > price['bitcoin']['usd']:
-        btc5m = client.get_channel(808357886953652224)
+        btc5m = client.get_channel() <--------------------------------------- # ID of channel where BTC price will be posted every 5 mins.
         btc5m_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
         btc5m_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0x1f8b4c)
         btc5m_embed.add_field(name="Price", value=f"{btc5m_updater['bitcoin']['usd']}", inline=True)
@@ -242,7 +270,7 @@ async def _btc5m():
             url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
         await btc5m.send(embed=btc5m_embed)
     else:
-        btc5m = client.get_channel(808357886953652224)
+        btc5m = client.get_channel() <------------------------------------------------ # Same as above
         btc5m_updater = cg.get_price(ids='bitcoin', vs_currencies='usd')
         btc5m_embed = discord.Embed(title=f"BTC", description=f"Bitcoin vs USD", colour=0xe74c3c)
         btc5m_embed.add_field(name="Price", value=f"{btc5m_updater['bitcoin']['usd']}", inline=True)
@@ -255,6 +283,13 @@ async def _btc5m():
 
 
 
+                              
+                              
+                              
+# Dogecoin 5min updates
+                              
+                              
+                              
 
 @tasks.loop(seconds=300.0)
 async def _doge5m():
@@ -262,7 +297,7 @@ async def _doge5m():
     await asyncio.sleep(270)
     price = cg.get_price(ids='dogecoin', vs_currencies='inr')
     if price_change['dogecoin']['inr'] > price['dogecoin']['inr']:
-        doge5m = client.get_channel(808367220794982420)
+        doge5m = client.get_channel() <--------------------------------------- # ID of channel where dogecoin price will be posted every 5 mins.
         doge5m_updater = cg.get_price(ids='dogecoin', vs_currencies='inr')
         doge5m_embed = discord.Embed(title=f"Doge", description=f"Doge vs INR", colour=0x1f8b4c)
         doge5m_embed.add_field(name="Price", value=f"{doge5m_updater['dogecoin']['inr']}", inline=True)
@@ -271,7 +306,7 @@ async def _doge5m():
         doge5m_embed.set_thumbnail(url="https://cdn.discordapp.com/avatars/802976971276550166/896230be1048bb539ffc0d36b4cc3639.png?size=128")
         await doge5m.send(embed=doge5m_embed)
     else:
-        doge5m = client.get_channel(808367220794982420)
+        doge5m = client.get_channel() <------------------------------------------------ # Same as above
         doge5m_updater = cg.get_price(ids='dogecoin', vs_currencies='inr')
         doge5m_embed = discord.Embed(title=f"Doge", description=f"Doge vs INR", colour=0xe74c3c)
         doge5m_embed.add_field(name="Price", value=f"{doge5m_updater['dogecoin']['inr']}", inline=True)
