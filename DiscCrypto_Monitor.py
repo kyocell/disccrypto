@@ -19,15 +19,13 @@
 import discord
 from discord.ext import commands
 from discord.ext import tasks
-import random
-from pytwitterscraper import TwitterScraper
 from pycoingecko import CoinGeckoAPI
 from itertools import cycle
 from datetime import datetime
 import asyncio
 
 
-statuses = cycle(['Monitoring Crypto\n\ndiscord.gg/JBwnGN7GMv', '$help\n\ndiscord.gg/JBwnGN7GMv'])
+statuses = cycle(['status1', 'status2'])
 client = commands.Bot(command_prefix="$")
 
 now = datetime.now()
@@ -50,28 +48,9 @@ async def change_status():
     await client.change_presence(activity=discord.Game(next(statuses)))
 
 
-@client.event
-async def on_member_join(member):
-    print(f"{member} has arrived.")
-    welcome = client.get_channel()  <--- #Enter the ID of #welcome channel
-    await welcome.send(f"{member} has arrived.")
-
-
-async def on_member_remove(member):
-    print(f"pce {member}")
-    bye = client.get_channel()   <--- #Enter the ID of #welcome/#left channel
-    await bye.send(f"pce {member}")
-
-
 @client.command()
 async def ping(ctx):
     await ctx.send(f"Pong! ({round(client.latency * 1000)})")
-
-
-@client.command(aliases=["8ball"])
-async def _8ball(ctx):
-    responses = ['It is certain', 'It is decidedly so', 'Without a doubt', 'Yes – definitely', 'You may rely on it', 'As I see it, yes', 'Most likely', 'Outlook good', 'Yes Signs point to yes', 'Reply hazy', 'try again', 'Better not tell you now', 'Cannot predict now', 'Concentrate and ask again', 'Dont count on it', 'My reply is no', 'My sources say no', 'Outlook not so good', 'Very doubtful']
-    await ctx.send(f"{random.choice(responses)}")
 
 
 @client.command(aliases=["del", 'clear'])
@@ -79,14 +58,6 @@ async def purge(ctx, amount=5):
     await ctx.channel.purge(limit=amount)
 
 
-@client.command(aliases=["gettweet", "gtweet"])
-async def get_twt(ctx, *, ID):
-    embedVar = discord.Embed(title="Title", description="Desc", color=0x00ff00)
-    embedVar.add_field(name="Field1", value="hi", inline=False)
-    embedVar.add_field(name="Field2", value="hi2", inline=False)
-    tw = TwitterScraper()
-    twt = tw.get_tweets(ID)
-    await ctx.send(f"{twt.contents[0]['text']}")
 
 
 
