@@ -1,4 +1,4 @@
-# Disccrypto
+# Discord Crypto Monitor Bot
 Crypto monitoring bot that uses coingecko api and discord.py to send constant live crypto updates to a discord server.
 
 Please do have a little knowledge about discord bot programming before you try using this script.
